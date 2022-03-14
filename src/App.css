@@ -1,4 +1,11 @@
 .App {
-    text-align: center;
+    margin: 5% 20%;
+}
+
+.popular__movies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    column-gap: 1rem;
+    row-gap: 2rem;
 }
   
