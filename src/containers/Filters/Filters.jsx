@@ -2,7 +2,23 @@ import React, { useEffect } from 'react'
 
 import './Filters.css'
 
-
+const shuffle = (array) => {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (currentIndex != 5) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
 
 const Filters = ({ year, setYear, setFilteredMovies, movies }) => {
     const filterYearLists = []
@@ -16,14 +32,14 @@ const Filters = ({ year, setYear, setFilteredMovies, movies }) => {
             setFilteredMovies(movies)
             return
         }
-        const filteredMovies = movies.filter(movie => Number(movie.year) === year)
+        const filteredMovies = movies.filter(movie => Number(movie.year) >= year)
         setFilteredMovies(filteredMovies)
     }, [year])
 
     return (
         <div className="filters__container">
             <button onClick={() => setYear(0)}>All</button>
-            { filterYearLists.map((yr, index) => (
+            { filterYearLists.map(yr => (
                 <button className={year === yr ? 'active' : ''} key={yr} type="button" onClick={() => setYear(yr)}>Year {yr}</button>
             )) }
         </div>

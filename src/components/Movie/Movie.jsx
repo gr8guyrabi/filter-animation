@@ -1,17 +1,21 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 
 import './Movie.css'
 
-const createMediumImageUrl = (imgUrl) => {
-    return imgUrl.replace("original", "M").replace("_V1_Ratio0.6716_AL_", "_V1_QL75_UX280_CR0,6,280,414_")
-}
-
 const Movie = ({title, image}) => {
   return (
-    <div className="movie">
+    <motion.div 
+        layout
+        animate={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        className="movie"
+    >
         <h2 className="movie-title">{title}</h2>
         <img src={image ? image : 'https://imdb-api.com/images/original/nopicture.jpg'} alt={title} />
-    </div>
+    </motion.div>
   )
 }
 

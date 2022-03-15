@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import { Movie } from './components'
 import { Filters } from './containers'
@@ -25,13 +26,15 @@ const App = () => {
     return (
         <div className="App">
             <Filters movies={movies} setFilteredMovies={setFilteredMovies} year={year} setYear={setYear}/>
-            <div className="popular__movies">
-                {filteredMovies.length > 0 ? filteredMovies?.map(movie => (
-                    <Movie key={movie.id} {...movie} />
-                )) : (
-                    <h2>No Movies Found For Year {year}</h2>
-                )}
-            </div>    
+            <motion.div className="popular__movies">
+                <AnimatePresence>
+                    {filteredMovies.length > 0 ? filteredMovies?.map(movie => (
+                        <Movie key={movie.id} {...movie} />
+                    )) : (
+                        <h2>No Movies Found For Year {year}</h2>
+                    )}
+                </AnimatePresence>
+            </motion.div>    
         </div>
     )
 }
